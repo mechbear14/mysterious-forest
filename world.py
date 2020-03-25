@@ -23,23 +23,16 @@ class Forest:
         return self.player
 
     def go_to(self, x: int, y: int):
-        prev_block = self.blocks[self.xy_2_index(*self.player.position)]
         block = self.blocks[self.xy_2_index(x, y)]
         player_position = self.player.position
 
         if self.graph.check_accessible(player_position[0], player_position[1], x, y):
-            prev_block.on_leave(self)
             block.on_enter(self)
         elif (x, y) in self.approachables:
             if block.state == Block.UNKNOWN:
-                prev_block.on_leave(self)
                 block.on_reveal(self)
             elif block.state == Block.REVEALED:
-                prev_block.on_leave(self)
                 block.on_open(self)
-            elif block.state == Block.PASSED:
-                prev_block.on_leave(self)
-                block.on_enter(self)
 
     def make_accessible(self, x: int, y: int):
         src_x, src_y = self.player.position.x, self.player.position.y
@@ -49,6 +42,8 @@ class Forest:
         self.graph.clear_accessible(x, y)
 
     def move_player_to(self, x: int, y: int):
+        prev_block = self.blocks[self.xy_2_index(*self.player.position)]
+        prev_block.on_leave(self)
         self.player.update_position(x, y)
         self.approachables = self.graph.get_direct_accessible(x, y)
 

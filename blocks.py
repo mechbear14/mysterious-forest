@@ -53,11 +53,21 @@ class PassBlock(Block):
         pygame.draw.rect(self.image,  self.primaryColour, Rect(
             Vector2(2, 2), self.size - Vector2(4, 4)))
 
+    def on_enter(self, forest):
+        x, y = self.position.x, self.position.y
+        forest.move_player_to(self.position.x, self.position.y)
+        print(f"You've entered block ({x}, {y})")
+
+    def on_leave(self, forest):
+        x, y = self.position.x, self.position.y
+        print(f"You've left block ({x}, {y})")
+
 
 class NormalBlock(Block):
     def __init__(self, x: int, y: int):
         Block.__init__(self, x, y)
         self.primaryColour = Color(128, 128, 128)
+        self.revealColour = Color(255, 200, 0)
 
     def on_create(self, forest):
         pygame.draw.rect(self.image,  self.primaryColour, Rect(
@@ -65,6 +75,8 @@ class NormalBlock(Block):
 
     def on_reveal(self, forest):
         x, y = self.position.x, self.position.y
+        pygame.draw.rect(self.image,  self.revealColour, Rect(
+            Vector2(2, 2), self.size - Vector2(4, 4)))
         print(f"You've revealed block ({x}, {y})")
         self.state = Block.REVEALED
 
@@ -78,6 +90,7 @@ class NormalBlock(Block):
                 Vector2(0, 0), self.size))
             print(f"Good. You can now pass block ({x}, {y})")
             self.state = Block.PASSED
+            forest.make_accessible(x, y)
             forest.move_player_to(self.position.x, self.position.y)
         else:
             print("Roar! You can't pass")
@@ -88,4 +101,5 @@ class NormalBlock(Block):
 
     def on_enter(self, forest):
         x, y = self.position.x, self.position.y
+        forest.move_player_to(self.position.x, self.position.y)
         print(f"You've entered block ({x}, {y})")

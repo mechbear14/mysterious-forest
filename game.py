@@ -20,7 +20,8 @@ while True:
             mouse_position = Vector2(pygame.mouse.get_pos())
             x = mouse_position.x // 50
             y = mouse_position.y // 50
-            world.go_to(x, y)
+            if -1 < x < world.width and -1 < y < world.height:
+                world.go_to(x, y)
     screen.fill((0, 0, 0))
     world.render(screen)
     player.draw(screen)
