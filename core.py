@@ -15,7 +15,7 @@ class ForestGraph:
         row_allowed = -1 < dest_x < self.width
         column_allowed = -1 < dest_y < self.height
         if all([row_allowed, column_allowed]):
-            accessed = numpy.zeros([self.size, 1])
+            accessed = numpy.zeros([self.size, 1], dtype=int)
             queue = deque([])
             src = self.rowcol_2_index(src_y, src_x)
             dest = self.rowcol_2_index(dest_y, dest_x)
@@ -67,4 +67,4 @@ class ForestGraph:
         self.graph[:][src]
 
     def rowcol_2_index(self, row: int, col: int) -> int:
-        return self.width * row + col
+        return int(self.width * row + col)

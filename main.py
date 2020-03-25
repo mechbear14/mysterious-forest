@@ -1,4 +1,4 @@
-from objects import Forest
+from world import Forest
 
 forest = Forest(6, 5)
 
