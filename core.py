@@ -1,5 +1,5 @@
 import numpy
-from collections import namedtuple, deque
+from collections import deque
 
 
 class ForestGraph:

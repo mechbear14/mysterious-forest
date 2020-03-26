@@ -22,36 +22,55 @@
 
 ## Architecture
 
-Objects in this model:
+Models in this game:
 
-### Forest
+### Objects
+
+#### Forest
 
 - Contains a list of blocks, a graph representation
 - resets itself
 - Renders itself
 
-### Block
+#### Block
 
 - Contains its location on map, its images and state
 - resets itself
 - Renders itself
 
-### Player
+#### Player
 
 - Contains its location, its images and state
 - resets itself
 - Renders itself
 
+### Components
+
+#### Message
+
+- Base class for other message types
+
+#### UI
+
+- Contains areas on screen
+
 ### Game
 
-- Contains message queue
+#### Config
+
+- Contains player position and blocks
+
+#### Scene
+
+- Contains forest and player
 - Reads file and construct the forest
 - Handles mouse clicks and UIs
 - Updates player based on blocks
 
-### UI
+#### Game
 
-- Contains areas on screen
+- Contains message queue and scenes
+- Switch between scenes
 
 ## Public API
 
