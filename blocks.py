@@ -1,4 +1,5 @@
 from player import Player
+from world import Forest
 
 import pygame
 from pygame.locals import *
